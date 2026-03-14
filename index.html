@@ -3,317 +3,54 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Marita Grace G. Moog | Portfolio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+    <title>M. Grace Moog | Main</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* Your Palette */
-            --gold: #e3bb06;
-            --yellow: #fbe821;
-            --ocean: #0e76b0;
-            --pink-soft: #ffaddb;
-            --pink-bold: #ff5f8c;
-            
-            /* Structural Colors - Updated to Dark Gray */
-            --dark-bg: #1e1e1e;
-            --card-bg: #262626;
-            --charcoal: #2d3436; 
-            --white: #ffffff;
-            --text-main: #eeeeee;
+            --ocean: #0e76b0; --gold: #e3bb06; --pink-bold: #ff5f8c;
+            --dark-bg: #1e1e1e; --white: #ffffff;
         }
+        body { font-family: 'Inter', sans-serif; margin: 0; background: var(--dark-bg); color: var(--white); overflow-x: hidden; }
+        
+        /* Neon RGB Header */
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 10%; position: fixed; width: 100%; top: 0; background: rgba(30, 30, 30, 0.95); backdrop-filter: blur(15px); z-index: 1000; box-sizing: border-box; }
+        nav::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000); background-size: 400%; animation: neonFlow 15s linear infinite; }
+        @keyframes neonFlow { 0% { background-position: 0% 0%; } 100% { background-position: 400% 0%; } }
+        
+        .logo { font-weight: 800; color: var(--ocean); text-transform: uppercase; text-decoration: none; font-size: 1.1rem; }
+        .nav-links a { margin-left: 35px; color: #ccc; font-weight: 700; text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1.2px; transition: 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--pink-bold); }
 
-        * { box-sizing: border-box; }
+        .hero { height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; position: relative; }
+        .shape { position: absolute; border-radius: 50%; filter: blur(80px); z-index: -1; opacity: 0.3; animation: float 12s infinite alternate ease-in-out; }
+        @keyframes float { from { transform: translate(0, 0); } to { transform: translate(40px, 40px); } }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            margin: 0;
-            color: var(--text-main);
-            background: var(--dark-bg);
-            overflow-x: hidden;
-        }
-
-        /* LOADING BAR */
-        #loader {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 4px;
-            background: linear-gradient(to right, var(--gold), var(--pink-bold));
-            z-index: 2000;
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.4s ease-in-out;
-        }
-
-        /* PAGE TRANSITIONS */
-        .page {
-            display: none;
-            min-height: 100vh;
-            padding: 120px 10% 60px;
-            animation: pageShift 0.7s cubic-bezier(0.23, 1, 0.32, 1);
-        }
-
-        .page.active { display: block; }
-
-        @keyframes pageShift {
-            from { opacity: 0; transform: scale(0.98) translateY(10px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
-        }
-
-        /* NAVIGATION & NEON GRADIENT HEADER */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 10%;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(30, 30, 30, 0.95);
-            backdrop-filter: blur(15px);
-            z-index: 1000;
-        }
-
-        /* The Neon RGB Gradient Line */
-        nav::after {
-            content: "";
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-            background-size: 400%;
-            animation: neonFlow 15s linear infinite;
-        }
-
-        @keyframes neonFlow {
-            0% { background-position: 0% 0%; }
-            100% { background-position: 400% 0%; }
-        }
-
-        .logo { font-weight: 800; color: var(--ocean); font-size: 1.1rem; letter-spacing: -1px; text-transform: uppercase; }
-
-        .nav-links a {
-            margin-left: 35px;
-            color: #ccc;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1.2px;
-        }
-
-        .nav-links a:hover, .nav-links a.active-link { color: var(--pink-bold); }
-
-        /* HOME / ANIMATED SHAPES */
-        #home {
-            background: var(--dark-bg);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .shape {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            z-index: -1;
-            opacity: 0.3;
-            animation: float 12s infinite alternate ease-in-out;
-        }
-
-        @keyframes float {
-            from { transform: translate(0, 0); }
-            to { transform: translate(40px, 40px); }
-        }
-
-        h1 { font-size: 5rem; letter-spacing: -4px; margin: 0; line-height: 0.9; color: var(--white); }
+        h1 { font-size: 5rem; letter-spacing: -4px; margin: 0; line-height: 0.9; }
         .tagline { font-size: 1rem; color: var(--gold); font-weight: 800; margin-top: 20px; text-transform: uppercase; letter-spacing: 3px; }
-
-        /* FEATURED BOX */
-        .featured-box {
-            background: rgba(40, 40, 40, 0.8);
-            backdrop-filter: blur(10px);
-            border: 2px solid #444;
-            border-radius: 30px;
-            padding: 50px;
-            max-width: 850px;
-            margin: 60px auto 0;
-            text-align: left;
-            transition: 0.4s;
-        }
-
-        .featured-box:hover {
-            box-shadow: 15px 15px 0px var(--ocean);
-            transform: translate(-5px, -5px);
-            border-color: var(--pink-soft);
-        }
-
-        /* PROJECT GRID */
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: var(--card-bg);
-            padding: 45px;
-            border-radius: 25px;
-            border: 1px solid #333;
-            transition: 0.4s;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .card:hover { 
-            border-color: var(--gold); 
-            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-            transform: translateY(-8px);
-        }
-
-        .card i { font-size: 1.8rem; color: var(--pink-bold); margin-bottom: 20px; }
-        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--ocean); font-weight: 800; }
-        .card p { font-size: 0.95rem; color: #bbb; margin-bottom: 30px; flex-grow: 1; line-height: 1.7; }
-
-        .project-btn {
-            background: var(--ocean);
-            color: white;
-            padding: 16px 30px;
-            border-radius: 12px;
-            font-weight: 700;
-            display: inline-block;
-            text-align: center;
-            transition: 0.3s;
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            text-decoration: none;
-        }
-
-        .project-btn:hover { background: var(--pink-bold); transform: scale(1.05); }
-
-        /* CONTACT */
-        .contact-wrap { text-align: center; max-width: 700px; margin: 40px auto; }
-        .social-icons { display: flex; justify-content: center; gap: 40px; font-size: 3rem; margin-top: 40px; }
-        .social-icons a { color: #eee; transition: 0.3s; }
-        .social-icons a:hover { color: var(--pink-bold); transform: scale(1.2); }
-
-        footer { text-align: center; padding: 60px 0; font-size: 0.75rem; opacity: 0.4; letter-spacing: 2px; text-transform: uppercase; }
-
+        
+        .featured-box { background: rgba(40, 40, 40, 0.8); border: 2px solid #444; border-radius: 30px; padding: 50px; max-width: 800px; margin-top: 60px; text-align: left; transition: 0.4s; }
+        .featured-box:hover { box-shadow: 15px 15px 0px var(--ocean); transform: translate(-5px, -5px); border-color: var(--pink-bold); }
+        .btn { background: var(--ocean); color: white; padding: 16px 30px; border-radius: 12px; font-weight: 700; text-decoration: none; display: inline-block; margin-top: 20px; text-transform: uppercase; font-size: 0.85rem; }
     </style>
 </head>
 <body>
-
-<div id="loader"></div>
-
-<nav>
-    <div class="logo">M. Grace Moog</div>
-    <div class="nav-links">
-        <a onclick="showPage('home')" id="link-home" class="active-link">Main</a>
-        <a onclick="showPage('projects')" id="link-projects">Portfolio</a>
-        <a onclick="showPage('contact')" id="link-contact">Connect</a>
-    </div>
-</nav>
-
-<section id="home" class="page active">
-    <div class="shape" style="width: 500px; height: 500px; top: -150px; right: -100px; background: var(--ocean);"></div>
-    <div class="shape" style="width: 400px; height: 400px; bottom: -100px; left: -100px; background: var(--pink-bold); animation-delay: 2s;"></div>
-
-    <h1>Marita Grace<br>G. Moog</h1>
-    <p class="tagline">Statistics • Data Analytics • Strategic Systems</p>
-    
-    <div class="featured-box">
-        <span style="color: var(--pink-bold); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px;">Top Technical Work</span>
-        <h2 style="font-size: 2.2rem; margin: 15px 0; letter-spacing: -1px; color: var(--ocean);">Video Game Market Dashboard</h2>
-        <p style="font-size: 1.1rem; color: #ccc; line-height: 1.6;">Interactive market intelligence suite built with <strong>Python and Streamlit</strong>. High-fidelity <strong>Plotly</strong> visualizations for industry-level decision support.</p>
-        <a href="https://video-game-dashboard-ge4ljivpdjsrccdkfjpj2f.streamlit.app/" target="_blank" class="project-btn">Explore Live Dashboard</a>
-    </div>
-</section>
-
-<section id="projects" class="page">
-    <h2 style="font-size: 3.5rem; letter-spacing: -3px; margin-bottom: 5px; color: var(--white);">Academic Case Studies</h2>
-    <p style="color: var(--ocean); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 50px;">Graduate Portfolio • Mapúa University</p>
-    
-    <div class="grid">
-        <div class="card">
-            <i class="fas fa-vial"></i>
-            <h3>PFD Net Income Optimization</h3>
-            <p><strong>MBAN 629:</strong> Six Sigma DMAIC methodologies for Landbank's Provident Fund, utilizing statistical inference to validate core growth drivers.</p>
-            <a href="https://drive.google.com/file/d/1LxeH6NuYbIIYoJrKBO8xr_9PcCUyir_R/view?usp=sharing" target="_blank" class="project-btn">View Case Study</a>
+    <nav>
+        <a href="index.html" class="logo">M. Grace Moog</a>
+        <div class="nav-links">
+            <a href="index.html" class="active">Main</a>
+            <a href="portfolio.html">Portfolio</a>
+            <a href="connect.html">Connect</a>
         </div>
-
-        <div class="card">
-            <i class="fas fa-city"></i>
-            <h3>Real Estate Market Analysis</h3>
-            <p><strong>MBAN 625:</strong> Solving Metro Manila's condo oversupply challenges through advanced Clustering and Regression modeling.</p>
-            <a href="https://drive.google.com/file/d/1_JkbzQRV0UqzNV3VYwHfBiA59yVuxqXX/view?usp=sharing" target="_blank" class="project-btn">View Report</a>
+    </nav>
+    <section class="hero">
+        <div class="shape" style="width: 500px; height: 500px; top: -100px; right: -50px; background: var(--ocean);"></div>
+        <h1>Marita Grace<br>G. Moog</h1>
+        <p class="tagline">Statistics • Data Analytics • Strategic Systems</p>
+        <div class="featured-box">
+            <h2 style="color:var(--ocean); margin-top:0;">Top Technical Work</h2>
+            <p style="color:#ccc; line-height:1.6;"><strong>Video Game Market Dashboard:</strong> Interactive market intelligence built with Python and Streamlit, featuring high-fidelity Plotly visualizations.</p>
+            <a href="https://video-game-dashboard-ge4ljivpdjsrccdkfjpj2f.streamlit.app/" target="_blank" class="btn">Launch Dashboard</a>
         </div>
-
-        <div class="card">
-            <i class="fas fa-microscope"></i>
-            <h3>H.A.N.D.A. Health Analytics</h3>
-            <p><strong>MBAN 627:</strong> Deep Learning predictive framework using LSTM/GRU models to anticipate NCR disease outbreaks.</p>
-            <a href="https://drive.google.com/file/d/13dNIv66Rg8kz7dRFV9877EwU_R2CTfEo/view?usp=sharing" target="_blank" class="project-btn">View Strategy</a>
-        </div>
-
-        <div class="card">
-            <i class="fas fa-chess"></i>
-            <h3>ABS-CBN Strategic Plan</h3>
-            <p><strong>MBAN 620:</strong> Developing corporate pivot strategies through Environmental Scanning and the Balanced Scorecard.</p>
-            <a href="https://drive.google.com/file/d/1NDFTlissGdEWDo_z9TN3ytiKg7U2uXRm/view?usp=sharing" target="_blank" class="project-btn">Read Paper</a>
-        </div>
-    </div>
-</section>
-
-<section id="contact" class="page">
-    <div class="contact-wrap">
-        <h2 style="font-size: 5rem; letter-spacing: -4px; margin-bottom: 10px; color: var(--white);">Let's Talk.</h2>
-        <p style="font-size: 1.2rem; opacity: 0.9; color: var(--ocean); font-weight: 500;">Bridging the gap between statistical rigor and corporate strategy.</p>
-        
-        <div class="social-icons">
-            <a href="https://www.linkedin.com/in/marita-grace-moog-049732220/" target="_blank"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:mgmoog@mymail.mapua.edu.ph"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/mgm-22" target="_blank"><i class="fab fa-github"></i></a>
-        </div>
-        
-        <p style="margin-top: 80px; font-weight: 800; font-size: 1.2rem; color: var(--pink-bold);">mgmoog@mymail.mapua.edu.ph</p>
-    </div>
-</section>
-
-<footer>
-    &copy; 2026 Marita Grace G. Moog | Mapúa University
-</footer>
-
-<script>
-    function showPage(pageId) {
-        const loader = document.getElementById('loader');
-        loader.style.transform = 'scaleX(1)';
-        
-        setTimeout(() => {
-            // Logic to switch active page
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            document.getElementById(pageId).classList.add('active');
-
-            // Logic to switch active link styling
-            document.querySelectorAll('.nav-links a').forEach(link => {
-                link.classList.remove('active-link');
-            });
-            document.getElementById('link-' + pageId).classList.add('active-link');
-
-            window.scrollTo({ top: 0 });
-            loader.style.transform = 'scaleX(0)';
-        }, 400);
-    }
-</script>
-
+    </section>
 </body>
 </html>
