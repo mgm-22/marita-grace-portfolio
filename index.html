@@ -1,27 +1,217 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Grace | E-Portfolio</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marita Grace Moog | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #ab8d8d;      /* Dusty Rose */
+            --accent: #f7b2b2;       /* Soft Pink */
+            --bg-light: #f5eded;     /* Off-White/Grey */
+            --bg-cream: #f8e2da;     /* Warm Cream */
+            --header-bg: #f1d8d8;    /* Light Blush */
+            --text-dark: #4a4a4a;
+        }
 
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var/(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Navigation */
+        nav {
+            background-color: white;
+            padding: 1rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .nav-links a {
+            margin-left: 2rem;
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hero Section */
+        header {
+            background: linear-gradient(135deg, var(--header-bg) 0%, var(--bg-cream) 100%);
+            padding: 100px 10% 80px;
+            text-align: center;
+        }
+
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Buttons */
+        .btn {
+            background-color: var(--primary);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            display: inline-block;
+            transition: transform 0.2s, background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #8f7575;
+            transform: translateY(-2px);
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 10%;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            color: var(--primary);
+        }
+
+        /* Portfolio Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border-bottom: 4px solid var(--accent);
+            transition: box-shadow 0.3s;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.8rem;
+            margin: 0 15px;
+            transition: opacity 0.3s;
+        }
+
+        .social-links a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.5rem; }
+            section { padding: 50px 5%; }
+        }
+    </style>
+</head>
 <body>
 
-<h1>Grace's Academic Portfolio</h1>
+    <nav>
+        <a href="#" class="logo">MGM</a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#portfolio">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </nav>
 
-<h2>About Me</h2>
-<p>Information Systems student interested in data analytics and dashboard development.</p>
+    <header>
+        <div class="hero-content">
+            <h1>Marita Grace Moog</h1>
+            <p>Aspiring Professional | Statistics & Data Analytics Enthusiast</p>
+            <a href="https://www.linkedin.com/in/marita-grace-moog-49b015182/" target="_blank" class="btn">
+                <i class="fab fa-linkedin"></i> Connect on LinkedIn
+            </a>
+        </div>
+    </header>
 
-<h2>Projects</h2>
+    <section id="about">
+        <h2 class="section-title">About Me</h2>
+        <div style="max-width: 800px; margin: 0 auto; text-align: center;">
+            <p>Welcome to my e-portfolio. I am a dedicated professional with a background in statistics, passionate about translating complex data into actionable insights.</p>
+        </div>
+    </section>
 
-<h3>Video Game Market Intelligence Dashboard</h3>
-<p>Interactive dashboard built with Python and Streamlit.</p>
+    <section id="portfolio" style="background-color: var(--bg-cream);">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>Statistical Analysis</h3>
+                <p>Detailed exploration of data trends using modern visualization techniques.</p>
+            </div>
+            <div class="card">
+                <h3>Research Portfolio</h3>
+                <p>A collection of academic papers and comprehensive examination studies.</p>
+            </div>
+            <div class="card">
+                <h3>Data Visualization</h3>
+                <p>Interactive dashboards and clear, professional graphical representations.</p>
+            </div>
+        </div>
+    </section>
 
-<a href="https://video-game-dashboard-ge4ljivpdjsrccdkfjpj2f.streamlit.app/">
-View Dashboard
-</a>
-
-<h3>Data Visualization Project</h3>
-<p>Analysis of video game sales trends using Python.</p>
+    <footer id="contact">
+        <h2 style="font-family: 'Playfair Display', serif;">Get In Touch</h2>
+        <p>Looking for a collaborator or a dedicated team member? Let's talk.</p>
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/marita-grace-moog-49b015182/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:your-email@example.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <p style="margin-top: 30px; font-size: 0.8rem; opacity: 0.8;">&copy; 2026 Marita Grace Moog. All rights reserved.</p>
+    </footer>
 
 </body>
 </html>
