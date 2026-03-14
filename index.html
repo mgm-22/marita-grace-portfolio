@@ -9,12 +9,17 @@
 
     <style>
         :root {
-            --blush: #ffdbdc;
-            --rose: #eaa0a2;
+            /* Your New Hex Palette */
+            --gold: #e3bb06;
+            --yellow: #fbe821;
+            --ocean: #0e76b0;
+            --pink-soft: #ffaddb;
+            --pink-bold: #ff5f8c;
+            
+            /* Structural Colors */
             --charcoal: #2d3436; 
-            --slate: #4a69bd;    
             --white: #ffffff;
-            --bg-soft: #fcfcfc;
+            --bg-soft: #f9f9f9;
         }
 
         * { box-sizing: border-box; }
@@ -27,19 +32,31 @@
             overflow-x: hidden;
         }
 
+        /* LOADING BAR */
+        #loader {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 4px;
+            background: linear-gradient(to right, var(--gold), var(--pink-bold));
+            z-index: 2000;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease-in-out;
+        }
+
         /* PAGE TRANSITIONS */
         .page {
             display: none;
             min-height: 100vh;
-            padding: 120px 10%;
-            animation: fadeIn 0.6s ease-in-out;
+            padding: 120px 10% 60px;
+            animation: pageShift 0.7s cubic-bezier(0.23, 1, 0.32, 1);
         }
 
         .page.active { display: block; }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        @keyframes pageShift {
+            from { opacity: 0; transform: scale(0.98) translateY(10px); }
+            to { opacity: 1; transform: scale(1) translateY(0); }
         }
 
         /* NAVIGATION */
@@ -52,192 +69,232 @@
             width: 100%;
             top: 0;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(12px);
+            backdrop-filter: blur(15px);
             z-index: 1000;
-            border-bottom: 1px solid var(--blush);
+            border-bottom: 3px solid var(--yellow);
         }
 
-        .logo { font-weight: 800; color: var(--charcoal); font-size: 1.2rem; letter-spacing: -1px; }
+        .logo { font-weight: 800; color: var(--ocean); font-size: 1.1rem; letter-spacing: -1px; text-transform: uppercase; }
 
         .nav-links a {
             margin-left: 35px;
             color: var(--charcoal);
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
             transition: 0.3s;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 1.2px;
         }
 
-        .nav-links a:hover, .nav-links a.active-link { color: var(--slate); }
+        .nav-links a:hover, .nav-links a.active-link { color: var(--pink-bold); }
 
-        /* HERO SECTION */
+        /* HOME / ANIMATED SHAPES */
         #home {
-            background: linear-gradient(135deg, var(--blush) 0%, var(--white) 100%);
-            text-align: center;
+            background: var(--white);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        h1 { font-size: 4.5rem; letter-spacing: -3px; margin-bottom: 10px; line-height: 1; }
-        .tagline { font-size: 1.1rem; color: var(--slate); font-weight: 500; margin-bottom: 40px; }
+        .shape {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(70px);
+            z-index: -1;
+            opacity: 0.5;
+            animation: float 12s infinite alternate ease-in-out;
+        }
 
-        /* FEATURED DASHBOARD */
+        @keyframes float {
+            from { transform: translate(0, 0) rotate(0deg); }
+            to { transform: translate(60px, 40px) rotate(15deg); }
+        }
+
+        h1 { font-size: 5rem; letter-spacing: -4px; margin: 0; line-height: 0.9; color: var(--charcoal); }
+        .tagline { font-size: 1rem; color: var(--ocean); font-weight: 800; margin-top: 20px; text-transform: uppercase; letter-spacing: 3px; }
+
+        /* FEATURED BOX */
         .featured-box {
-            background: var(--white);
-            border: 2px solid var(--charcoal);
-            border-radius: 24px;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            border: 4px solid var(--charcoal);
+            border-radius: 30px;
             padding: 50px;
-            max-width: 900px;
-            margin: 40px auto;
+            max-width: 850px;
+            margin: 60px auto 0;
             text-align: left;
-            position: relative;
-            transition: 0.4s ease;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .featured-box:hover {
-            box-shadow: 15px 15px 0px var(--rose);
-            transform: translate(-5px, -5px);
+            box-shadow: 20px 20px 0px var(--yellow);
+            transform: translate(-10px, -10px);
+            border-color: var(--ocean);
         }
 
-        /* UPDATED PROJECT GRID */
+        /* PROJECT GRID */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
             gap: 30px;
-            margin-top: 50px;
+            margin-top: 40px;
         }
 
         .card {
-            background: var(--bg-soft);
-            padding: 40px;
-            border-radius: 20px;
-            border: 1px solid #eee;
+            background: var(--white);
+            padding: 45px;
+            border-radius: 25px;
+            border: 2px solid #eee;
             transition: 0.4s;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
         .card:hover { 
-            border-color: var(--slate); 
-            background: var(--white); 
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+            border-color: var(--gold); 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.06);
+            transform: translateY(-8px);
         }
 
-        .card i { font-size: 2rem; color: var(--rose); margin-bottom: 20px; }
-        .card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--charcoal); }
-        .card p { font-size: 0.95rem; color: #555; margin-bottom: 25px; flex-grow: 1; }
+        .card i { font-size: 1.8rem; color: var(--pink-bold); margin-bottom: 20px; }
+        .card h3 { font-size: 1.5rem; margin-bottom: 15px; color: var(--ocean); font-weight: 800; }
+        .card p { font-size: 0.95rem; color: #555; margin-bottom: 30px; flex-grow: 1; line-height: 1.7; }
 
         .project-btn {
-            background: var(--slate);
+            background: var(--ocean);
             color: white;
-            padding: 14px 28px;
-            border-radius: 8px;
-            font-weight: 600;
+            padding: 16px 30px;
+            border-radius: 12px;
+            font-weight: 700;
             display: inline-block;
             text-align: center;
             transition: 0.3s;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        .project-btn:hover { background: var(--charcoal); }
+        .project-btn:hover { background: var(--pink-bold); transform: translateY(-2px); box-shadow: 0 5px 15px rgba(255, 95, 140, 0.3); }
 
-        footer { text-align: center; padding: 60px 0; font-size: 0.8rem; opacity: 0.5; letter-spacing: 1px; }
+        /* CONTACT */
+        .contact-wrap { text-align: center; max-width: 700px; margin: 40px auto; }
+        .social-icons { display: flex; justify-content: center; gap: 40px; font-size: 3rem; margin-top: 40px; }
+        .social-icons a { color: var(--charcoal); transition: 0.3s; }
+        .social-icons a:hover { color: var(--ocean); transform: scale(1.1) rotate(-5deg); }
 
+        footer { text-align: center; padding: 60px 0; font-size: 0.75rem; opacity: 0.6; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+
+        @media(max-width: 768px) {
+            h1 { font-size: 3.5rem; }
+            .featured-box { padding: 30px; }
+        }
     </style>
 </head>
 <body>
 
+<div id="loader"></div>
+
 <nav>
-    <div class="logo">MARITA GRACE MOOG</div>
+    <div class="logo">mggm.</div>
     <div class="nav-links">
-        <a onclick="showPage('home')" id="link-home" class="active-link">Home</a>
-        <a onclick="showPage('projects')" id="link-projects">Projects</a>
+        <a onclick="showPage('home')" id="link-home" class="active-link">Main</a>
+        <a onclick="showPage('projects')" id="link-projects">Portfolio</a>
         <a onclick="showPage('contact')" id="link-contact">Connect</a>
     </div>
 </nav>
 
 <section id="home" class="page active">
+    <div class="shape" style="width: 500px; height: 500px; top: -150px; right: -100px; background: var(--pink-soft);"></div>
+    <div class="shape" style="width: 400px; height: 400px; bottom: -100px; left: -100px; background: var(--yellow); animation-delay: 2s;"></div>
+    <div class="shape" style="width: 300px; height: 300px; top: 20%; left: 10%; background: var(--gold); animation-duration: 15s;"></div>
+
     <h1>Marita Grace<br>G. Moog</h1>
-    <p class="tagline">Statistics Graduate Student • Data Analytics Specialist</p>
+    <p class="tagline">Civil Engineer • Business Analytics Student</p>
     
     <div class="featured-box">
-        <span style="color: var(--slate); font-weight: 800; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 2px;">Featured Technical Project</span>
-        <h2 style="font-size: 2.2rem; margin: 15px 0;">Video Game Market Dashboard</h2>
-        <p>Interactive market intelligence tool built with <strong>Python, Plotly, and Streamlit</strong>. Transforming raw industry datasets into high-fidelity UI components for real-time data exploration and trend analysis.</p>
-        <a href="https://video-game-dashboard-ge4ljivpdjsrccdkfjpj2f.streamlit.app/" target="_blank" class="project-btn">Launch Dashboard</a>
+        <span style="color: var(--pink-bold); font-weight: 800; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px;">Top Technical Work</span>
+        <h2 style="font-size: 2.2rem; margin: 15px 0; letter-spacing: -1px; color: var(--ocean);">Video Game Market Dashboard</h2>
+        <p style="font-size: 1.1rem; color: #444; line-height: 1.6;">An interactive market intelligence suite built with <strong>Python and Streamlit</strong>. This project showcases end-to-end data pipelines and high-fidelity <strong>Plotly</strong> visualizations for industry-level decision support.</p>
+        <a href="https://video-game-dashboard-ge4ljivpdjsrccdkfjpj2f.streamlit.app/" target="_blank" class="project-btn">Explore Live Dashboard</a>
     </div>
 </section>
 
 <section id="projects" class="page">
-    <h2 style="font-size: 3rem; margin-bottom: 10px; letter-spacing: -2px;">Academic Case Studies</h2>
-    <p style="color: var(--slate); font-weight: 500;">Bridging statistical rigor with strategic business management.</p>
+    <h2 style="font-size: 3.5rem; letter-spacing: -3px; margin-bottom: 5px; color: var(--charcoal);">Academic Case Studies</h2>
+    <p style="color: var(--ocean); font-weight: 800; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 2px; margin-bottom: 50px;">Graduate Portfolio • Mapúa University</p>
     
     <div class="grid">
         <div class="card">
             <i class="fas fa-vial"></i>
             <h3>PFD Net Income Optimization</h3>
-            <p><strong>MBAN 629:</strong> Six Sigma DMAIC project for Landbank's Provident Fund, validating drivers for a 4% growth target using statistical inference.</p>
+            <p><strong>MBAN 629:</strong> Applied Six Sigma DMAIC methodologies for Landbank's Provident Fund, utilizing statistical inference to validate core growth drivers.</p>
             <a href="https://drive.google.com/file/d/1LxeH6NuYbIIYoJrKBO8xr_9PcCUyir_R/view?usp=sharing" target="_blank" class="project-btn">View Case Study</a>
         </div>
 
         <div class="card">
             <i class="fas fa-city"></i>
             <h3>Real Estate Market Analysis</h3>
-            <p><strong>MBAN 625:</strong> Utilizing Clustering and Regression to address Metro Manila's condo oversupply and optimize inventory management.</p>
+            <p><strong>MBAN 625:</strong> Solving Metro Manila's condo oversupply challenges through advanced Clustering and Regression modeling for inventory optimization.</p>
             <a href="https://drive.google.com/file/d/1_JkbzQRV0UqzNV3VYwHfBiA59yVuxqXX/view?usp=sharing" target="_blank" class="project-btn">View Report</a>
         </div>
 
         <div class="card">
             <i class="fas fa-microscope"></i>
             <h3>H.A.N.D.A. Health Analytics</h3>
-            <p><strong>MBAN 627:</strong> Predictive health framework using LSTM/GRU Deep Learning models to anticipate disease outbreaks in the NCR region.</p>
+            <p><strong>MBAN 627:</strong> Deep Learning predictive framework using LSTM/GRU models to anticipate NCR disease outbreaks with high precision.</p>
             <a href="https://drive.google.com/file/d/13dNIv66Rg8kz7dRFV9877EwU_R2CTfEo/view?usp=sharing" target="_blank" class="project-btn">View Strategy</a>
         </div>
 
         <div class="card">
             <i class="fas fa-chess"></i>
             <h3>ABS-CBN Strategic Plan</h3>
-            <p><strong>MBAN 620:</strong> Corporate strategy using a Balanced Scorecard to pivot towards digital platforms and sustainable advertising revenue.</p>
+            <p><strong>MBAN 620:</strong> Developing corporate pivot strategies through Environmental Scanning and the Balanced Scorecard for digital revenue growth.</p>
             <a href="https://drive.google.com/file/d/1NDFTlissGdEWDo_z9TN3ytiKg7U2uXRm/view?usp=sharing" target="_blank" class="project-btn">Read Paper</a>
         </div>
     </div>
 </section>
 
 <section id="contact" class="page">
-    <div style="text-align: center; max-width: 700px; margin: auto;">
-        <h2 style="font-size: 4rem; letter-spacing: -3px;">Let's Connect.</h2>
-        <p style="font-size: 1.1rem; margin-bottom: 50px;">Available for data science collaborations and strategic research projects.</p>
+    <div class="contact-wrap">
+        <h2 style="font-size: 5rem; letter-spacing: -4px; margin-bottom: 10px; color: var(--charcoal);">Let's Talk.</h2>
+        <p style="font-size: 1.2rem; opacity: 0.9; color: var(--ocean); font-weight: 500;">Bridging the gap between statistical rigor and corporate strategy.</p>
         
-        <div style="display: flex; justify-content: center; gap: 40px; font-size: 2.5rem;">
-            <a href="https://www.linkedin.com/in/marita-grace-moog-049732220/" target="_blank" style="color: var(--slate);"><i class="fab fa-linkedin"></i></a>
-            <a href="mailto:mgmoog@mymail.mapua.edu.ph" style="color: var(--rose);"><i class="fas fa-envelope"></i></a>
-            <a href="https://github.com/mgm-22" target="_blank" style="color: var(--charcoal);"><i class="fab fa-github"></i></a>
+        <div class="social-icons">
+            <a href="https://www.linkedin.com/in/marita-grace-moog-049732220/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="mailto:mgmoog@mymail.mapua.edu.ph"><i class="fas fa-envelope"></i></a>
+            <a href="https://github.com/mgm-22" target="_blank"><i class="fab fa-github"></i></a>
         </div>
         
-        <p style="margin-top: 60px; font-weight: 600;">mgmoog@mymail.mapua.edu.ph</p>
+        <p style="margin-top: 80px; font-weight: 800; font-size: 1.2rem; color: var(--pink-bold); letter-spacing: 1px;">mgmoog@mymail.mapua.edu.ph</p>
     </div>
 </section>
 
 <footer>
-    &copy; 2026 MARITA GRACE G. MOOG | MAPÚA UNIVERSITY
+    &copy; 2026 Marita Grace G. Moog | Mapúa University
 </footer>
 
 <script>
     function showPage(pageId) {
-        // Hide all pages
-        const pages = document.querySelectorAll('.page');
-        pages.forEach(page => page.classList.remove('active'));
+        const loader = document.getElementById('loader');
+        loader.style.transform = 'scaleX(1)';
+        
+        setTimeout(() => {
+            document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
 
-        // Show requested page
-        document.getElementById(pageId).classList.add('active');
+            document.querySelectorAll('.nav-links a').forEach(link => link.classList.remove('active-link'));
+            document.getElementById('link-' + pageId).classList.add('active-link');
 
-        // Update nav links
-        const links = document.querySelectorAll('.nav-links a');
-        links.forEach(link => link.classList.remove('active-link'));
-        document.getElementById('link-' + pageId).classList.add('active-link');
-
-        // Scroll to top smoothly
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+            window.scrollTo({ top: 0 });
+            loader.style.transform = 'scaleX(0)';
+        }, 450);
     }
 </script>
 
